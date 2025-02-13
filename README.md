@@ -1,46 +1,56 @@
-#!/bin/bash
 
 
-if ! command -v git &> /dev/null; then
-    echo "🔄 Installation de Git..."
-    sudo apt update && sudo apt install git -y
-else
-    echo "✅ Git est déjà installé."
-fi
+📌 **GitHub SSH Setup Script**
+-----------------------------------
+Automatise la configuration de Git et l'ajout de la clé SSH pour se connecter à GitHub depuis un serveur Ubuntu.
 
+🚀 **Fonctionnalités**
+-----------------------------------
+✅ Vérifie et installe Git si nécessaire
+✅ Configure votre nom et email Git
+✅ Génère une clé SSH si inexistante
+✅ Ajoute la clé SSH à l'agent SSH
+✅ Affiche la clé publique pour l'ajouter à GitHub
+✅ Teste la connexion avec GitHub
 
-read -p "📝 Entrez votre nom GitHub : " username
-read -p "📧 Entrez votre email GitHub : " email
+🛠 **Installation & Exécution**
+-----------------------------------
+1️⃣ **Téléchargez le script**
+```bash
+wget https://raw.githubusercontent.com/MedusaSH/setup-github/main/setup-github.sh
+```
 
+2️⃣ **Donnez-lui les permissions d'exécution**
+```bash
+chmod +x setup-github.sh
+```
 
-git config --global user.name "$username"
-git config --global user.email "$email"
-echo "✅ Configuration de Git enregistrée."
+3️⃣ **Lancez le script**
+```bash
+./setup-github.sh
+```
 
+🔑 **Ajout de la clé SSH sur GitHub**
+-----------------------------------
+Rendez-vous sur [GitHub SSH Keys](https://github.com/settings/keys) et collez la clé affichée par le script.
 
-if [ -f ~/.ssh/id_rsa ]; then
-    echo "🔑 Une clé SSH existe déjà."
-else
-    
-    echo "🛠 Génération d'une nouvelle clé SSH..."
-    ssh-keygen -t rsa -b 4096 -C "$email" -f ~/.ssh/id_rsa -N ""
-
-   
-    eval "$(ssh-agent -s)"
-    ssh-add ~/.ssh/id_rsa
-    echo "✅ Clé SSH générée et ajoutée à l'agent SSH."
-fi
-
-
-echo "🚀 Copiez cette clé et ajoutez-la à GitHub : https://github.com/settings/keys"
-echo "-----------------------------------------"
-cat ~/.ssh/id_rsa.pub
-echo "-----------------------------------------"
-
-read -p "⏳ Appuyez sur [Entrée] après avoir ajouté la clé à GitHub..."
-
-
-echo "🛠 Test de connexion à GitHub..."
+📡 **Test de connexion**
+-----------------------------------
+Après avoir ajouté la clé sur GitHub, testez votre connexion avec :
+```bash
 ssh -T git@github.com
+```
+Vous devriez voir :
+```
+Hi username! You've successfully authenticated, but GitHub does not provide shell access.
+```
 
-echo "✅ Configuration terminée ! Vous pouvez utiliser GitHub avec SSH."
+📜 **Licence**
+-----------------------------------
+🔓 Ce projet est open-source et sous licence MIT. Vous pouvez l'utiliser librement !
+
+💬 **Contact & Contributions**
+-----------------------------------
+📩 Vous avez une suggestion ou une amélioration ? Ouvrez une issue ou envoyez un pull request sur GitHub !
+
+🌟 **Si ce projet vous aide, laissez une étoile ⭐ sur GitHub !**
