@@ -7,11 +7,17 @@ Automatise la configuration de Git et l'ajout de la clé SSH pour se connecter �
 🚀 **Fonctionnalités**
 -----------------------------------
 ✅ Vérifie et installe Git si nécessaire
+
 ✅ Configure votre nom et email Git
+
 ✅ Génère une clé SSH si inexistante
+
 ✅ Ajoute la clé SSH à l'agent SSH
+
 ✅ Affiche la clé publique pour l'ajouter à GitHub
+
 ✅ Teste la connexion avec GitHub
+
 
 🛠 **Installation & Exécution**
 -----------------------------------
